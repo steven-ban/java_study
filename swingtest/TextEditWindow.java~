@@ -1,0 +1,55 @@
+/**
+ * 使用JAVA编写窗口程序
+ */
+
+package swingtest;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class TextEditWindow implements ItemListener {
+	public static void main(String[] args) {
+
+	JFrame frame = new JFrame("Main Window");
+
+	Dimension minSize = new Dimension(800, 600);
+	frame.setMinimumSize(minSize);
+
+	// set menu
+	MenuBar menuBar = new MenuBar();
+	Menu fileMenu = new  Menu("File");
+	Menu editMenu = new Menu("Edit");
+	Menu viewMenu = new Menu("View");
+	Menu runMenu = new Menu("Run");
+	Menu toolsMenu = new Menu("Tools");
+	Menu helpMenu = new Menu("Help");
+	MenuItem aboutMenuItem = new MenuItem("About");
+	aboutMenuItem.addItemListener(this);
+	helpMenu.add(aboutMenuItem);
+	menuBar.add(fileMenu);
+	menuBar.add(editMenu);
+	menuBar.add(viewMenu);
+	menuBar.add(runMenu);
+	menuBar.add(toolsMenu);
+	menuBar.add(helpMenu);
+	
+	frame.setMenuBar(menuBar);
+	frame.setVisible(true);
+	}
+
+	public void itemStateChanged(ItemEvent e){
+		if (e.getStateChange() == ItemEvent.SELECTED){
+			// 弹出对话框显示“关于”信息
+			Dialog aboutDialog = new Dialog(this, "About");
+			String aboutInfo = "This is a java program written by Steven. 2016/02/20.");
+			Label label = new Label(aboutInfo);
+			aboutDialog.add(label);
+			aboutDialog.setVisible(true);
+
+		}
+		else {
+			// do nothing
+			// 
+		}
+	}
+}
